@@ -14,10 +14,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TaskInteractor {
+public class TaskInteractor extends BaseInteractor {
 
     private static final String TAG = TaskInteractor.class.getName();
-    public static String BASE_URL = "http://172.21.14.38:8882/";
 
     //Step 1
     public interface TodoListListener {
