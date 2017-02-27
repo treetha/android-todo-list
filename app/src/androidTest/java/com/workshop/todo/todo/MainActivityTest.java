@@ -58,7 +58,7 @@ public class MainActivityTest {
     public void login_success_should_show_all_task() throws IOException {
         server.enqueue(new MockResponse()
                 .setResponseCode(200)
-                .setBody(getDataFromFile("login_sucess.json")));
+                .setBody(getDataFromFile("login_success.json")));
         server.enqueue(new MockResponse()
                 .setResponseCode(200)
                 .setBody(getDataFromFile("all_task.json")));
