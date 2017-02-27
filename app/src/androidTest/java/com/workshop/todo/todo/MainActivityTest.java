@@ -5,6 +5,7 @@ import android.support.test.espresso.core.deps.guava.base.Charsets;
 import android.support.test.espresso.core.deps.guava.io.Resources;
 import android.support.test.rule.ActivityTestRule;
 
+import com.workshop.todo.todo.interactor.BaseInteractor;
 import com.workshop.todo.todo.interactor.TaskInteractor;
 
 import org.junit.After;
@@ -20,6 +21,8 @@ import okhttp3.mockwebserver.MockWebServer;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -39,7 +42,7 @@ public class MainActivityTest {
         server = new MockWebServer();
         server.start();
         //TODO
-        TaskInteractor.BASE_URL = server.url("/").toString();
+        BaseInteractor.BASE_URL = server.url("/").toString();
     }
 
     @After
@@ -65,6 +68,10 @@ public class MainActivityTest {
         activityTestRule.launchActivity(intent);
 
         //Press signin button
+        onView(withId(R.id.edt_user_name))
+                .perform(typeText("somkiat"), closeSoftKeyboard());
+        onView(withId(R.id.edt_password))
+                .perform(typeText("pui"), closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());
 
         //Check list of task
