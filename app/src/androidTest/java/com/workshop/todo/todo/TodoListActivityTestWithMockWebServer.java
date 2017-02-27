@@ -5,8 +5,11 @@ import android.support.test.espresso.core.deps.guava.base.Charsets;
 import android.support.test.espresso.core.deps.guava.io.Resources;
 import android.support.test.rule.ActivityTestRule;
 
+import com.workshop.todo.todo.interactor.TaskInteractor;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -27,7 +30,8 @@ import static org.hamcrest.core.AllOf.allOf;
 
 public class TodoListActivityTestWithMockWebServer {
     @Rule
-    public ActivityTestRule activityTestRule = new ActivityTestRule(TodoListActivity.class, true, false);
+    public ActivityTestRule activityTestRule
+            = new ActivityTestRule(TodoListActivity.class, true, false);
 
     private MockWebServer server;
 
@@ -36,6 +40,7 @@ public class TodoListActivityTestWithMockWebServer {
         server = new MockWebServer();
         server.start();
         //TODO
+        TaskInteractor.BASE_URL = server.url("/").toString();
     }
 
     @After
@@ -57,8 +62,10 @@ public class TodoListActivityTestWithMockWebServer {
         Intent intent = new Intent();
         activityTestRule.launchActivity(intent);
 
-        onData(anything()).inAdapterView(withId(R.id.list_todo)).atPosition(9).perform(click());
-        onView(withId(R.id.task_description)).check(matches(withText("Mock Webserver 10")));
+        onData(anything()).inAdapterView(withId(R.id.list_todo))
+                .atPosition(9).perform(click());
+        onView(withId(R.id.task_description))
+                .check(matches(withText("Mock Webserver 10")));
     }
 
 }
