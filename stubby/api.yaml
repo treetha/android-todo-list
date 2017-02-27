@@ -1,0 +1,9 @@
+-  request:
+      method: GET
+      url: /tasks
+
+   response:
+      status: 200
+      headers:
+         content-type: application/json
+      file: all_task.json
