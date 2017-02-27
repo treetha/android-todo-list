@@ -4,7 +4,7 @@ do
     then
         device=`echo $line | awk '{print $1}'`
         echo "Run >>adb -s $device $@"
-        #adb -s $device uninstall com.workshop.todo.todo
+        adb -s $device uninstall com.workshop.todo.todo
         adb -s $device $@
     fi
 done
