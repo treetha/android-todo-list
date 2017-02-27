@@ -13,10 +13,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.workshop.todo.todo.interactor.TaskInteractor;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoListActivity extends AppCompatActivity {
+
+public class TodoListActivity extends AppCompatActivity implements TaskInteractor.TodoListListener {
 
     private ListView taskListView;
     private TaskAdapter taskAdapter;
@@ -27,13 +30,15 @@ public class TodoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_todo_list);
 
         List<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("Task 01"));
-        tasks.add(new Task("Task 02"));
-        tasks.add(new Task("Task 03"));
-
         taskListView = (ListView) findViewById(R.id.list_todo);
         taskAdapter = new TaskAdapter(this, tasks);
         taskListView.setAdapter(taskAdapter);
+
+        //TODO
+        //Step 4
+        TaskInteractor taskInteractor = new TaskInteractor();
+        taskInteractor.setListener(this);
+        taskInteractor.listAllTask();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +48,13 @@ public class TodoListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onSuccess(List<Task> tasks) {
+        //Step 5
+        taskAdapter.addAll(tasks);
+        taskAdapter.notifyDataSetChanged();
     }
 
     private void buildAndShowInputDialog() {
