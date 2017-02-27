@@ -2,6 +2,7 @@ package com.workshop.todo.todo;
 
 import android.support.test.rule.ActivityTestRule;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -20,18 +21,18 @@ public class TodoListActivityTest {
     public ActivityTestRule activityTestRule
             = new ActivityTestRule(TodoListActivity.class);
 
-    @Test
+    @Test @Ignore
     public void row_Click() {
         onView(allOf(withText("New 04")))
                 .perform(click());
     }
 
-    @Test
+    @Test @Ignore
     public void overScreen() {
         onView(withText("New 20")).check(doesNotExist());
     }
 
-    @Test
+    @Test @Ignore
     public void row_Click_at_last() {
         onData(anything())
                 .inAdapterView(withId(R.id.list_todo))
