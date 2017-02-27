@@ -20,13 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-    compile 'com.android.support:design:25.2.0'
 
     //Unit testing
     testCompile 'junit:junit:4.12'
@@ -41,8 +42,12 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
 
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile 'com.android.support:design:25.2.0'
+
     //Mocking
-    androidTestCompile "com.squareup.okhttp3:mockwebserver:3.2.0"
+    androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.2.0'
 }
 
 apply plugin: 'jacoco'
@@ -80,7 +85,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
             subproject.pluginManager.hasPlugin('java')
         }.each { subproject ->
             additionalSourceDirs files((Set<File>) subproject.sourceSets.main.allJava.srcDirs)
-            additionalClassDirs ((FileCollection) subproject.sourceSets.main.output)
+            additionalClassDirs((FileCollection) subproject.sourceSets.main.output)
             if (subproject.pluginManager.hasPlugin('jacoco')) {
                 executionData subproject.tasks.jacocoTestReport.executionData
             }
