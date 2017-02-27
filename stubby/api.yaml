@@ -7,3 +7,23 @@
       headers:
          content-type: application/json
       file: all_task.json
+
+-  request:
+      method: GET
+      url: /login/somkiat/pui
+
+   response:
+      status: 200
+      headers:
+         content-type: application/json
+      file: login_success.json
+
+-  request:
+      method: GET
+      url: /login/somkiat/pui02
+
+   response:
+      status: 200
+      headers:
+         content-type: application/json
+      file: login_fail.json
