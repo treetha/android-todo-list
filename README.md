@@ -8,5 +8,5 @@ Feature list
 
 Run test and capture screen with Fastlane
 ```
-$./gradlew clean assembleDebug && fastlane screengrab
+$./gradlew clean assembleDebug assembleAndroidTest && fastlane screengrab
 ```
